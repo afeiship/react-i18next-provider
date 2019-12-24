@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body,
+#app,
+.app-container {
+  height: 100%;
+}
+
+@import "@/components/style.scss";
+
+.app-container {
+  p {
+    margin: 0;
+  }
+  padding: 50px;
+  .react-i18next-provider {
+    padding: 20px;
+    border: 2px dashed lightgreen;
+    &:hover{
+      border-color: green;
+    }
+  }
+}
