@@ -6,11 +6,12 @@
 npm install -S @feizheng/react-i18next-provider
 ```
 ## properties
-| property        | type | description |
-| --------------- | ---- | ----------- |
-| className       | -    | -           |
-| value           | -    | -           |
-| onChange        | -    | -           |
+| property  | type | description |
+| --------- | ---- | ----------- |
+| className | -    | -           |
+| value     | -    | -           |
+| resources | -    | -           |
+| children  | -    | -           |
 
 ## usage
 1. import css
