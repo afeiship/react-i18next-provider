@@ -2,6 +2,7 @@ import ReactAntI18n from '../src/main';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import './assets/style.scss';
+import i18next from 'i18next';
 
 class App extends React.Component {
   state = {
@@ -25,7 +26,7 @@ class App extends React.Component {
           {(value) => {
             return (
               <p>
-                {value.t('hello')} - {value.t('world')}
+                {i18next.t('hello')} - {i18next.t('world')}
               </p>
             );
           }}
