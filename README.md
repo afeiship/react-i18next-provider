@@ -8,7 +8,6 @@ npm install -S @feizheng/react-i18next-provider
 ## properties
 | property    | type | description |
 | ----------- | ---- | ----------- |
-| className   | -    | -           |
 | value       | -    | -           |
 | onChange    | -    | -           |
 | resources   | -    | -           |
