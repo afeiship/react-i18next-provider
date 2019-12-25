@@ -38,18 +38,20 @@ class App extends React.Component {
           <option value="zhTw">Chinese TW</option>
           <option value="en">English</option>
         </select>
-        <ReactI18nextProvider
-          value={lang}
-          onChange={this.onLangChange}
-          resources={this.state.resources}>
-          {() => {
-            return (
-              <p>
-                {i18next.t('hello')} - {i18next.t('world')}
-              </p>
-            );
-          }}
-        </ReactI18nextProvider>
+        <div className="react-i18next-provider">
+          <ReactI18nextProvider
+            value={lang}
+            onChange={this.onLangChange}
+            resources={this.state.resources}>
+            {() => {
+              return (
+                <p>
+                  {i18next.t('hello')} - {i18next.t('world')}
+                </p>
+              );
+            }}
+          </ReactI18nextProvider>
+        </div>
       </div>
     );
   }

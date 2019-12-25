@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import noop from '@feizheng/noop';
@@ -48,7 +47,7 @@ export default class extends Component {
     i18next.init(options);
   }
 
-  onI18nInitialized = (inEvent) => {
+  onI18nInitialized = () => {
     this.setState({ loaded: true });
   };
 
@@ -60,14 +59,6 @@ export default class extends Component {
   render() {
     const { className, resources, children, value, ...props } = this.props;
     const { loaded } = this.state;
-
-    return (
-      <div
-        data-component={CLASS_NAME}
-        className={classNames(CLASS_NAME, className)}
-        {...props}>
-        {loaded && children()}
-      </div>
-    );
+    return loaded && children();
   }
 }
