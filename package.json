@@ -1,6 +1,6 @@
 {
   "name": "@feizheng/react-i18next-provider",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "I18next provider for next.",
   "main": "dist/index.js",
   "scripts": {
