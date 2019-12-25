@@ -39,7 +39,7 @@ export default class extends Component {
   componentDidMount() {
     const { resources, value, i18nOptions } = this.props;
     const options = objectAssign(
-      { lng: value, debug: true, fallbackLng: 'en', resources },
+      { lng: value, debug: false, fallbackLng: 'en', resources },
       i18nOptions
     );
     i18next.on('initialized', this.onI18nInitialized);
