@@ -7,19 +7,21 @@ import objectAssign from 'object-assign';
 import i18next from 'i18next';
 
 const CLASS_NAME = 'react-i18next-provider';
-const I18nContext = React.createContext();
 
 export default class extends Component {
   static displayName = CLASS_NAME;
   static propTypes = {
     className: PropTypes.string,
     value: PropTypes.string,
+    onChange: PropTypes.func,
     children: PropTypes.func,
     resources: PropTypes.object.isRequired,
+    i18nOptions: PropTypes.object
   };
 
   static defaultProps = {
-    value: 'en'
+    value: 'en',
+    onChange: noop
   };
 
   constructor(inProps) {
@@ -27,20 +29,33 @@ export default class extends Component {
     this.state = { loaded: false };
   }
 
-  componentDidMount() {
-    const { resources, value } = this.props;
-    i18next.init(
-      {
-        lng: value,
-        debug: true,
-        fallbackLng: 'en',
-        resources
-      },
-      () => {
-        this.setState({ loaded: true });
-      }
-    );
+  shouldComponentUpdate(inProps) {
+    const { value } = inProps;
+    if (value !== this.props.value) {
+      i18next.changeLanguage(value);
+    }
+    return true;
   }
+
+  componentDidMount() {
+    const { resources, value, i18nOptions } = this.props;
+    const options = objectAssign(
+      { lng: value, debug: true, fallbackLng: 'en', resources },
+      i18nOptions
+    );
+    i18next.on('initialized', this.onI18nInitialized);
+    i18next.on('languageChanged', this.onI18nLanguageChanged);
+    i18next.init(options);
+  }
+
+  onI18nInitialized = (inEvent) => {
+    this.setState({ loaded: true });
+  };
+
+  onI18nLanguageChanged = (inEvent) => {
+    const { onChange } = this.props;
+    onChange({ target: { value: inEvent } });
+  };
 
   render() {
     const { className, resources, children, value, ...props } = this.props;
@@ -51,12 +66,7 @@ export default class extends Component {
         data-component={CLASS_NAME}
         className={classNames(CLASS_NAME, className)}
         {...props}>
-        {loaded &&
-          React.createElement(
-            I18nContext.Provider,
-            { value: { i18next } },
-            children(i18next)
-          )}
+        {loaded && children()}
       </div>
     );
   }
